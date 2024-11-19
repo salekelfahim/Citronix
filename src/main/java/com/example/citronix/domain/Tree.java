@@ -24,5 +24,4 @@ public class Tree {
     @OneToMany(mappedBy = "tree", cascade = CascadeType.ALL)
     private List<HarvestDetail> harvestDetails;
 
-
 }

@@ -4,6 +4,6 @@ spring:
     username: GreenPulse
     password:
     driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
+  liquibase:
+    enabled: true
+    change-log: db/changelog/master.yaml
