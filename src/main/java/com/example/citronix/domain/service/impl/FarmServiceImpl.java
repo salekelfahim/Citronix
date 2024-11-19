@@ -5,6 +5,7 @@ import com.example.citronix.domain.service.FarmService;
 import com.example.citronix.domain.service.dto.FarmDTO;
 import com.example.citronix.domain.service.dto.mapper.FarmMapper;
 import com.example.citronix.repository.FarmRepository;
+import com.example.citronix.web.errors.FieldMustBeNullException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,7 +22,7 @@ public class FarmServiceImpl implements FarmService {
     @Override
     public FarmDTO save(FarmDTO farmDTO) {
         if (farmDTO.getFields() != null && !farmDTO.getFields().isEmpty()) {
-            throw new FieldMustBeNullException("A farm cannot have fields at the time of creation.");
+            throw new FieldMustBeNullException();
         }
 
         Farm farm = farmMapper.toEntity(farmDTO);
