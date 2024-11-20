@@ -26,4 +26,10 @@ public class FarmRest {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FarmDTO> updateFarm(@PathVariable Long id, @RequestBody FarmDTO farmDTO) {
+        FarmDTO updatedFarm = farmService.update(id, farmDTO);
+        return ResponseEntity.ok(updatedFarm);
+    }
 }
