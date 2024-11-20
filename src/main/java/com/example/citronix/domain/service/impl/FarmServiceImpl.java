@@ -6,6 +6,7 @@ import com.example.citronix.domain.service.dto.FarmDTO;
 import com.example.citronix.domain.service.dto.mapper.FarmMapper;
 import com.example.citronix.repository.FarmCriteriaRepository;
 import com.example.citronix.repository.FarmRepository;
+import com.example.citronix.web.errors.FarmNotFoundException;
 import com.example.citronix.web.errors.FieldMustBeNullException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -44,7 +45,7 @@ public class FarmServiceImpl implements FarmService {
     @Override
     public FarmDTO update(Long id, FarmDTO farmDTO) {
         Farm existingFarm = farmRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Farm not found with id: " + id));
+                .orElseThrow(FarmNotFoundException::new);
 
         existingFarm.setName(farmDTO.getName());
         existingFarm.setLocation(farmDTO.getLocation());
