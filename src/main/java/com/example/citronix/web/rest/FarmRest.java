@@ -5,9 +5,12 @@ import com.example.citronix.domain.service.dto.FarmDTO;
 import com.example.citronix.web.errors.FieldMustBeNullException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
 
 
 @RestController
@@ -45,6 +48,19 @@ public class FarmRest {
     @GetMapping("/all")
     public ResponseEntity<Page<FarmDTO>> getAllFarms(Pageable pageable) {
         Page<FarmDTO> farms = farmService.findAll(pageable);
+        return ResponseEntity.ok(farms);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<FarmDTO>> searchFarms(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) Double minArea,
+            @RequestParam(required = false) Double maxArea,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+    ) {
+        List<FarmDTO> farms = farmService.searchFarms(name, location, minArea, maxArea, startDate, endDate);
         return ResponseEntity.ok(farms);
     }
 }
