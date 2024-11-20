@@ -32,4 +32,10 @@ public class FarmRest {
         FarmDTO updatedFarm = farmService.update(id, farmDTO);
         return ResponseEntity.ok(updatedFarm);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<FarmDTO> getFarmById(@PathVariable Long id) {
+        FarmDTO farm = farmService.findById(id);
+        return ResponseEntity.ok(farm);
+    }
 }

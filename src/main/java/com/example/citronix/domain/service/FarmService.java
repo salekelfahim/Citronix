@@ -8,5 +8,7 @@ import org.springframework.stereotype.Service;
 public interface FarmService {
     FarmDTO save(FarmDTO farmDTO);
     FarmDTO update(Long id, FarmDTO farmDTO);
+    FarmDTO findById(Long id);
+
 
 }

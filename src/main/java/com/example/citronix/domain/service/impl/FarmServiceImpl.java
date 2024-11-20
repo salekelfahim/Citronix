@@ -45,4 +45,11 @@ public class FarmServiceImpl implements FarmService {
         return farmMapper.toDTO(updatedFarm);
     }
 
+    @Override
+    public FarmDTO findById(Long id) {
+        Farm farm = farmRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Farm not found with id: " + id));
+        return farmMapper.toDTO(farm);
+    }
+
 }
