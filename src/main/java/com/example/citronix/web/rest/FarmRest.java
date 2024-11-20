@@ -3,8 +3,11 @@ package com.example.citronix.web.rest;
 import com.example.citronix.domain.service.FarmService;
 import com.example.citronix.domain.service.dto.FarmDTO;
 import com.example.citronix.web.errors.FieldMustBeNullException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @RestController
@@ -37,5 +40,11 @@ public class FarmRest {
     public ResponseEntity<FarmDTO> getFarmById(@PathVariable Long id) {
         FarmDTO farm = farmService.findById(id);
         return ResponseEntity.ok(farm);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Page<FarmDTO>> getAllFarms(Pageable pageable) {
+        Page<FarmDTO> farms = farmService.findAll(pageable);
+        return ResponseEntity.ok(farms);
     }
 }
