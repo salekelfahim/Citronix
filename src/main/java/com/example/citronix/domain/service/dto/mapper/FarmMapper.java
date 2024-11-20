@@ -11,5 +11,6 @@ public interface FarmMapper {
     @Mapping(target = "fields", ignore = true)
     Farm toEntity(FarmDTO farmDTO);
 
+    @Mapping(target = "fields", ignore = true)
     FarmDTO toDTO(Farm farm);
 }
