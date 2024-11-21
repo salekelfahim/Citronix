@@ -54,6 +54,24 @@ public class GlobalExceptionHandler {
         return e.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidPlantingPeriodException.class)
+    public String handleIllegalArgumentException(InvalidPlantingPeriodException e) {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NonProductiveTreeException.class)
+    public String handleIllegalArgumentException(NonProductiveTreeException e) {
+        return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ExceededTreeDensityException.class)
+    public String handleIllegalArgumentException(ExceededTreeDensityException e) {
+        return e.getMessage();
+    }
+
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
