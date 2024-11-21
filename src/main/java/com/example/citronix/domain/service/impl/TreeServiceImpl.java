@@ -8,6 +8,7 @@ import com.example.citronix.repository.TreeRepository;
 import com.example.citronix.web.errors.ExceededTreeDensityException;
 import com.example.citronix.web.errors.InvalidPlantingPeriodException;
 import com.example.citronix.web.errors.NonProductiveTreeException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -47,5 +48,39 @@ public class TreeServiceImpl implements TreeService {
         if (existingTreeCount + trees.size() > maxAllowedTrees) {
             throw new ExceededTreeDensityException();
         }
+    }
+
+    @Override
+    public Tree update(Long id, Tree updatedTree) {
+        // Fetch the existing tree
+        Tree existingTree = treeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tree not found with id: " + id));
+
+        // Update properties
+        existingTree.setPlantingDate(updatedTree.getPlantingDate());
+
+        if (updatedTree.getField() != null) {
+            existingTree.setField(fieldService.findById(updatedTree.getField().getId()));
+        }
+
+        // Validate planting period and productivity
+        if (!existingTree.isValidPlantingPeriod()) {
+            throw new InvalidPlantingPeriodException();
+        }
+
+        if (!existingTree.isProductive()) {
+            throw new NonProductiveTreeException();
+        }
+
+        return treeRepository.save(existingTree);
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (!treeRepository.existsById(id)) {
+            throw new EntityNotFoundException("Tree not found with id: " + id);
+        }
+
+        treeRepository.deleteById(id);
     }
 }

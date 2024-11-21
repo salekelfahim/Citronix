@@ -10,4 +10,6 @@ import java.util.List;
 public interface TreeService {
     Tree save(Tree tree);
     void validateTreeSpacing(Field field, List<Tree> trees);
+    Tree update(Long id, Tree updatedTree);
+    void delete(Long id);
 }
