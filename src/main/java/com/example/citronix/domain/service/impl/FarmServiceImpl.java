@@ -23,58 +23,45 @@ public class FarmServiceImpl implements FarmService {
     private final FarmRepository farmRepository;
     private final FarmCriteriaRepository farmCriteriaRepository;
 
-    private final FarmMapper farmMapper;
-
-    public FarmServiceImpl(FarmRepository farmRepository,FarmCriteriaRepository farmCriteriaRepository, FarmMapper farmMapper) {
+    public FarmServiceImpl(FarmRepository farmRepository, FarmCriteriaRepository farmCriteriaRepository) {
         this.farmRepository = farmRepository;
         this.farmCriteriaRepository = farmCriteriaRepository;
-        this.farmMapper = farmMapper;
     }
 
     @Override
-    public FarmDTO save(FarmDTO farmDTO) {
-        if (farmDTO.getFields() != null && !farmDTO.getFields().isEmpty()) {
+    public Farm save(Farm farm) {
+        if (farm.getFields() != null && !farm.getFields().isEmpty()) {
             throw new FieldMustBeNullException();
         }
-
-        Farm farm = farmMapper.toEntity(farmDTO);
-        farm = farmRepository.save(farm);
-        return farmMapper.toDTO(farm);
+        return farmRepository.save(farm);
     }
 
     @Override
-    public FarmDTO update(Long id, FarmDTO farmDTO) {
+    public Farm update(Long id, Farm farm) {
         Farm existingFarm = farmRepository.findById(id)
                 .orElseThrow(FarmNotFoundException::new);
 
-        existingFarm.setName(farmDTO.getName());
-        existingFarm.setLocation(farmDTO.getLocation());
-        existingFarm.setArea(farmDTO.getArea());
-        existingFarm.setCreationDate(farmDTO.getCreationDate());
+        existingFarm.setName(farm.getName());
+        existingFarm.setLocation(farm.getLocation());
+        existingFarm.setArea(farm.getArea());
+        existingFarm.setCreationDate(farm.getCreationDate());
 
-        Farm updatedFarm = farmRepository.save(existingFarm);
-        return farmMapper.toDTO(updatedFarm);
+        return farmRepository.save(existingFarm);
     }
 
     @Override
-    public FarmDTO findById(Long id) {
-        Farm farm = farmRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Farm not found with id: " + id));
-        return farmMapper.toDTO(farm);
+    public Farm findById(Long id) {
+        return farmRepository.findById(id)
+                .orElseThrow(FarmNotFoundException::new);
     }
 
     @Override
-    public Page<FarmDTO> findAll(Pageable pageable) {
-        return farmRepository.findAll(pageable)
-                .map(farmMapper::toDTO);
+    public Page<Farm> findAll(Pageable pageable) {
+        return farmRepository.findAll(pageable);
     }
 
     @Override
-    public List<FarmDTO> searchFarms(String name, String location, Double minArea, Double maxArea, LocalDate startDate, LocalDate endDate) {
-        List<Farm> farms = farmCriteriaRepository.searchFarms(name, location, minArea, maxArea, startDate, endDate);
-        return farms.stream()
-                .map(farmMapper::toDTO)
-                .collect(Collectors.toList());
+    public List<Farm> searchFarms(String name, String location, Double minArea, Double maxArea, LocalDate startDate, LocalDate endDate) {
+        return farmCriteriaRepository.searchFarms(name, location, minArea, maxArea, startDate, endDate);
     }
-
 }

@@ -15,30 +15,29 @@ public class FieldServiceImpl implements FieldService {
 
     private final FieldRepository fieldRepository;
     private final FarmRepository farmRepository;
-    private final FieldMapper fieldMapper;
 
-    public FieldServiceImpl(FieldRepository fieldRepository, FarmRepository farmRepository, FieldMapper fieldMapper) {
+    public FieldServiceImpl(FieldRepository fieldRepository, FarmRepository farmRepository) {
         this.fieldRepository = fieldRepository;
         this.farmRepository = farmRepository;
-        this.fieldMapper = fieldMapper;
     }
+
     @Override
-    public FieldDTO save(FieldDTO fieldDTO) {
-        Farm farm = farmRepository.findById(fieldDTO.getFarmId())
+    public Field save(Field field) {
+        Farm farm = farmRepository.findById(field.getFarm().getId())
                 .orElseThrow(FarmNotFoundException::new);
 
-        if (fieldDTO.getArea() < 0.1) {
+        if (field.getArea() < 0.1) {
             throw new InvalidFieldAreaException();
         }
 
-        if (fieldDTO.getArea() > farm.getArea() * 0.5) {
+        if (field.getArea() > farm.getArea() * 0.5) {
             throw new ExceededFieldAreaException();
         }
 
         double totalFieldArea = fieldRepository.findByFarmId(farm.getId()).stream()
                 .mapToDouble(Field::getArea)
                 .sum();
-        if (totalFieldArea + fieldDTO.getArea() >= farm.getArea()) {
+        if (totalFieldArea + field.getArea() >= farm.getArea()) {
             throw new ExceededTotalFieldAreaException();
         }
 
@@ -46,9 +45,7 @@ public class FieldServiceImpl implements FieldService {
             throw new ExceededFieldCountException();
         }
 
-        Field field = fieldMapper.toEntity(fieldDTO);
         field.setFarm(farm);
-        field = fieldRepository.save(field);
-        return fieldMapper.toDTO(field);
+        return fieldRepository.save(field);
     }
 }
