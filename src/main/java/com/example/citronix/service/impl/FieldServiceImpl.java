@@ -1,10 +1,8 @@
-package com.example.citronix.domain.service.impl;
+package com.example.citronix.service.impl;
 
 import com.example.citronix.domain.Farm;
 import com.example.citronix.domain.Field;
-import com.example.citronix.domain.service.FieldService;
-import com.example.citronix.domain.service.dto.FieldDTO;
-import com.example.citronix.domain.service.dto.mapper.FieldMapper;
+import com.example.citronix.service.FieldService;
 import com.example.citronix.repository.FarmRepository;
 import com.example.citronix.repository.FieldRepository;
 import com.example.citronix.web.errors.*;

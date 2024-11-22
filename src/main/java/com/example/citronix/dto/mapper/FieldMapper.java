@@ -1,7 +1,7 @@
-package com.example.citronix.domain.service.dto.mapper;
+package com.example.citronix.dto.mapper;
 
 import com.example.citronix.domain.Field;
-import com.example.citronix.domain.service.dto.FieldDTO;
+import com.example.citronix.dto.FieldDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

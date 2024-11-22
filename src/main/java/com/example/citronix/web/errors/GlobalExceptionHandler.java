@@ -72,6 +72,12 @@ public class GlobalExceptionHandler {
         return e.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(SeasonLimitException.class)
+    public String handleIllegalArgumentException(SeasonLimitException e) {
+        return e.getMessage();
+    }
+
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)

@@ -1,7 +1,7 @@
-package com.example.citronix.domain.service.dto.mapper;
+package com.example.citronix.dto.mapper;
 
 import com.example.citronix.domain.Tree;
-import com.example.citronix.domain.service.dto.TreeDTO;
+import com.example.citronix.dto.TreeDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,9 +1,9 @@
 package com.example.citronix.web.rest;
 
 import com.example.citronix.domain.Field;
-import com.example.citronix.domain.service.FieldService;
-import com.example.citronix.domain.service.dto.FieldDTO;
-import com.example.citronix.domain.service.dto.mapper.FieldMapper;
+import com.example.citronix.service.FieldService;
+import com.example.citronix.dto.FieldDTO;
+import com.example.citronix.dto.mapper.FieldMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

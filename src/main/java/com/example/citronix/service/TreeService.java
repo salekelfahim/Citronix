@@ -1,4 +1,4 @@
-package com.example.citronix.domain.service;
+package com.example.citronix.service;
 
 import com.example.citronix.domain.Field;
 import com.example.citronix.domain.Tree;
