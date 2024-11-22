@@ -78,6 +78,12 @@ public class GlobalExceptionHandler {
         return e.getMessage();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InsufficientHarvestQuantityException.class)
+    public String InsufficientHarvestQuantityException(InsufficientHarvestQuantityException e) {
+        return e.getMessage();
+    }
+
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
