@@ -1,9 +1,9 @@
 package com.example.citronix.web.rest;
 
 import com.example.citronix.domain.Farm;
-import com.example.citronix.domain.service.FarmService;
-import com.example.citronix.domain.service.dto.FarmDTO;
-import com.example.citronix.domain.service.dto.mapper.FarmMapper;
+import com.example.citronix.service.FarmService;
+import com.example.citronix.dto.FarmDTO;
+import com.example.citronix.dto.mapper.FarmMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;

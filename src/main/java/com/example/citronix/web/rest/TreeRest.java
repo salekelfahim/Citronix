@@ -1,9 +1,9 @@
 package com.example.citronix.web.rest;
 
 import com.example.citronix.domain.Tree;
-import com.example.citronix.domain.service.TreeService;
-import com.example.citronix.domain.service.dto.TreeDTO;
-import com.example.citronix.domain.service.dto.mapper.TreeMapper;
+import com.example.citronix.service.TreeService;
+import com.example.citronix.dto.TreeDTO;
+import com.example.citronix.dto.mapper.TreeMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

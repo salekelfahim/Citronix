@@ -1,21 +1,17 @@
-package com.example.citronix.domain.service.impl;
+package com.example.citronix.service.impl;
 
 import com.example.citronix.domain.Farm;
-import com.example.citronix.domain.service.FarmService;
-import com.example.citronix.domain.service.dto.FarmDTO;
-import com.example.citronix.domain.service.dto.mapper.FarmMapper;
+import com.example.citronix.service.FarmService;
 import com.example.citronix.repository.FarmCriteriaRepository;
 import com.example.citronix.repository.FarmRepository;
 import com.example.citronix.web.errors.FarmNotFoundException;
 import com.example.citronix.web.errors.FieldMustBeNullException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class FarmServiceImpl implements FarmService {

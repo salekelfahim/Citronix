@@ -1,9 +1,9 @@
-package com.example.citronix.domain.service.impl;
+package com.example.citronix.service.impl;
 
 import com.example.citronix.domain.Field;
 import com.example.citronix.domain.Tree;
-import com.example.citronix.domain.service.FieldService;
-import com.example.citronix.domain.service.TreeService;
+import com.example.citronix.service.FieldService;
+import com.example.citronix.service.TreeService;
 import com.example.citronix.repository.TreeRepository;
 import com.example.citronix.web.errors.ExceededTreeDensityException;
 import com.example.citronix.web.errors.InvalidPlantingPeriodException;
@@ -52,18 +52,15 @@ public class TreeServiceImpl implements TreeService {
 
     @Override
     public Tree update(Long id, Tree updatedTree) {
-        // Fetch the existing tree
         Tree existingTree = treeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tree not found with id: " + id));
 
-        // Update properties
         existingTree.setPlantingDate(updatedTree.getPlantingDate());
 
         if (updatedTree.getField() != null) {
             existingTree.setField(fieldService.findById(updatedTree.getField().getId()));
         }
 
-        // Validate planting period and productivity
         if (!existingTree.isValidPlantingPeriod()) {
             throw new InvalidPlantingPeriodException();
         }

@@ -1,4 +1,4 @@
-package com.example.citronix.domain.service.dto;
+package com.example.citronix.dto;
 
 import lombok.Getter;
 import lombok.Setter;
