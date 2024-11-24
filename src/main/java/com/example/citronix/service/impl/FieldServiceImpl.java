@@ -57,6 +57,7 @@ public class FieldServiceImpl implements FieldService {
 
         Farm farm = existingField.getFarm();
 
+
         if (updatedField.getArea() < 0.1) throw new InvalidFieldAreaException();
         if (updatedField.getArea() > farm.getArea() * 0.5) throw new ExceededFieldAreaException();
         double totalFieldArea = fieldRepository.findByFarmId(farm.getId()).stream()
