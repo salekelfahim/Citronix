@@ -138,7 +138,4 @@ class FieldServiceImplTest {
         verify(fieldRepository, never()).save(field);
     }
 
-
-
-
 }
